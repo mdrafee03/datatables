@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Yajra\Datatables\Datatables;
 
 class CustomerController extends Controller
 {
@@ -15,8 +16,18 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::get();
-        return view('customers.index', ['customers' => $customers]);
+        return view('customers.index');
+
+    }
+    public function data(Datatables $datatables)
+    {
+        $query = Customer::query();
+
+        return $datatables->eloquent($query)
+            ->addColumn('action', function($customer)
+            {
+                  return view('customers.actions', compact('customer'))->render();
+            })->make(true);
 
     }
 

@@ -1,4 +1,4 @@
-@extends('customers.templates.master')
+@extends('templates.master')
 
 @section('content')
 
@@ -21,12 +21,26 @@
                 <th width="150">Action</th>
             </tr>
         </thead>
-        <tbody>
-
-
-
-
-        </tbody>
     </table>
 
 @endsection()
+@push('scripts')
+
+<script>
+$(document).ready( function () {
+$('#cusTable').DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: '{!! route('customers.data') !!}',
+    columns: [
+        { data: 'id', name: 'id' },
+        { data: 'name', name: 'name' },
+        { data: 'mobile', name: 'mobile' },
+        { data: 'balance', name: 'balance' },
+        { data: 'university', name: 'university' },
+        { data: 'action', name: 'action', orderable: false, searchable: false }
+    ]
+});
+} );
+</script>
+@endpush

@@ -19,5 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('customers/data','CustomerController@data')->name('customers.data');
 Route::resource('customers', 'CustomerController');
-Route::get('data/customer','DatatableController@getCustomers')->name('dataProcessing');
