@@ -2,6 +2,7 @@ table {
     background-color: #ffffff;
     box-shadow: 0 0 10px #cccccc;
 }
+
 #deleteForm{
     display: inline-block;
 }

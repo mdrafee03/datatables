@@ -15,7 +15,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::all();
+        $customers = Customer::get();
         return view('customers.index', ['customers' => $customers]);
 
     }
@@ -108,4 +108,5 @@ class CustomerController extends Controller
         Session::flash('message', $customer['name'].  ' deleted successfully');
         return redirect('/customers');
     }
+
 }
