@@ -6,17 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="{!! asset('assets/css/bootstrap.min.css') !!}">
-    <link rel="stylesheet" href="{!! asset('assets/css/styles.css') !!}">
     <link rel="stylesheet" href="{!! asset('assets/css/datatables.min.css') !!}">
+    <link rel="stylesheet" href="{!! asset('assets/css/styles.css') !!}">
     <title>SafaMarwa</title>
 </head>
 <body>
-@include('templates.partials.header')
 
 <!-- container -->
 <div class="container">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-11 col-md-offset-1">
 
             @yield('content')
 
@@ -25,7 +24,6 @@
 </div><!-- container -->
 
 
-@include('templates.partials.footer')
 <script src="{!! asset('assets/js/jquery-3.2.1.min.js') !!}"></script>
 <script src="{!! asset('assets/js/bootstrap.min.js') !!}"></script>
 <script src="{!! asset('assets/js/script.js') !!}"></script>

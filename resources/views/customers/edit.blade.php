@@ -1,4 +1,4 @@
-@extends('customers.templates.master')
+@extends('templates.master')
 
 @section('content')
 

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h2>Read Data</h2>
+    <h2>Customer List</h2>
     <hr/>
     <a class="btn btn-success" href="customers/create" style="margin-bottom: 15px;">Create New</a>
     @if(Session::has('message'))

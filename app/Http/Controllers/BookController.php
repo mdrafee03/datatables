@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Customer;
+use App\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Yajra\Datatables\Datatables;
 
-class CustomerController extends Controller
+class BookController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,17 +16,17 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view('customers.index');
-
+        return view('books.index');
     }
+
     public function data(Datatables $datatables)
     {
-        $query = Customer::query();
+        $query = Book::query();
 
         return $datatables->eloquent($query)
-            ->addColumn('action', function($customer)
+            ->addColumn('action', function($book)
             {
-                  return view('customers.actions', compact('customer'))->render();
+                return view('books.actions', compact('book'))->render();
             })->make(true);
 
     }
@@ -38,8 +38,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-
-        return view('customers.create');
+        return view('books.create');
     }
 
     /**
@@ -51,16 +50,19 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'name' => 'required',
-            'mobile' => 'required',
-            'university' => 'required',
+            'book_code' => 'required',
+            'title' => 'required',
+            'author' => 'required',
+            'price_code' => 'required',
+            'price' => 'required',
+            'quantity' => 'required',
+            'status' => 'required',
         ]);
         $data = $request->all();
-        Customer::create($data);
+        Book::create($data);
 
-        Session::flash('message', $data['name'] . ' added successfully');
-        return redirect('/customers');
-
+        Session::flash('message', $data['title'] . ' added successfully');
+        return redirect('/books');
     }
 
     /**
@@ -82,8 +84,8 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        $customer = Customer::find($id);
-        return view('customers.edit',['customer' => $customer]);
+        $book = Book::find($id);
+        return view('books.edit',['book' => $book]);
     }
 
     /**
@@ -95,13 +97,12 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $customer = Customer::find($id);
+        $book = Book::find($id);
         $data = $request->all();
-        $customer->update($data);
+        $book->update($data);
 
-        Session::flash('message', $data['name'].  ' updated successfully');
-        return redirect('/customers');
-
+        Session::flash('message', $data['title'].  ' updated successfully');
+        return redirect('/books');
     }
 
     /**
@@ -112,12 +113,10 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
+        $book = Book::find($id);
+        $book->destroy($id);
 
-        $customer = Customer::find($id);
-        $customer->destroy($id);
-
-        Session::flash('message', $customer['name'].  ' deleted successfully');
-        return redirect('/customers');
+        Session::flash('message', $book['title'].  ' deleted successfully');
+        return redirect('/books');
     }
-
 }

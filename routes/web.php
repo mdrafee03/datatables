@@ -20,4 +20,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('customers/data','CustomerController@data')->name('customers.data');
+Route::get('books/data','BookController@data')->name('books.data');
 Route::resource('customers', 'CustomerController');
+Route::resource('books', 'BookController');
