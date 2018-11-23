@@ -55,7 +55,7 @@ class CustomerController extends Controller
             'mobile' => 'required',
             'university' => 'required',
         ]);
-        $data = $request->all();
+        $data = array_filter($request->all());
         Customer::create($data);
 
         Session::flash('message', $data['name'] . ' added successfully');

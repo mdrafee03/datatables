@@ -35,7 +35,7 @@
         </div>
         <div class="form-group">
             <label for="quantity">Quantity</label>
-            <input type="text" class="form-control {{$errors->has('quantity') ? 'border-danger' : '' }}" id ="quantity" name="quantity" placeholder="Enter Quantity">
+            <input type="number" class="form-control {{$errors->has('quantity') ? 'border-danger' : '' }}" id ="quantity" name="quantity" placeholder="Enter Quantity">
             <small class="error">{{ $errors->first('quantity') }}</small>
         </div>
         <div class="form-group">

@@ -15,13 +15,13 @@ class CreateBooksTable extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->increments('id');
-            $table->String('book_code');
-            $table->String('title');
+            $table->String('book_code')->nullable();
+            $table->String('title')->unique();
             $table->String('author');
-            $table->String('price_code');
-            $table->String('price');
-            $table->Integer('quantity');
-            $table->String('status');
+            $table->String('price_code')->nullable();
+            $table->double('price',10,2)->default(0);
+            $table->Integer('quantity')->default(0);
+            $table->String('status')->nullable();
             $table->timestamps();
         });
     }

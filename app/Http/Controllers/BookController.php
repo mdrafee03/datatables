@@ -50,15 +50,10 @@ class BookController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'book_code' => 'required',
             'title' => 'required',
             'author' => 'required',
-            'price_code' => 'required',
-            'price' => 'required',
-            'quantity' => 'required',
-            'status' => 'required',
         ]);
-        $data = $request->all();
+        $data = array_filter($request->all());
         Book::create($data);
 
         Session::flash('message', $data['title'] . ' added successfully');
