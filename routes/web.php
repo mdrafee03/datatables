@@ -23,3 +23,5 @@ Route::get('customers/data','CustomerController@data')->name('customers.data');
 Route::get('books/data','BookController@data')->name('books.data');
 Route::resource('customers', 'CustomerController');
 Route::resource('books', 'BookController');
+Route::get('cart', 'CartController@index')->name('cart');
+Route::get('select2-ajax', 'CartController@dataAjax');
