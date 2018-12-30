@@ -10,4 +10,10 @@ class Customer extends Model
         'name', 'mobile', 'balance', 'university',
     ];
 
+    public function carts()
+    {
+        return $this->hasMany('App\Cart');
+    }
+
+
 }
