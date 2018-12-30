@@ -15,10 +15,10 @@ class CreateCustomerTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->String('mobile');
             $table->float('balance')->default(0);
-            $table->string('university');
+            $table->string('university')->nullable();
             $table->timestamps();
         });
     }

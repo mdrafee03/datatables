@@ -10,8 +10,7 @@
         {{ csrf_field() }}
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control {{$errors->has('name') ? 'border-danger' : '' }}" id ="name" name="name" placeholder="Enter name">
-            <small class="error">{{ $errors->first('name') }}</small>
+            <input type="text" class="form-control" id ="name" name="name" placeholder="Enter name">
         </div>
         <div class="form-group">
             <label for="mobile">Mobile</label>
@@ -24,8 +23,7 @@
         </div>
         <div class="form-group">
             <label for="">University</label>
-            <input type="text" class="form-control {{$errors->has('university') ? 'border-danger' : '' }}" id ="university" name="university" placeholder="Enter University">
-            <small class="error">{{ $errors->first('university') }}</small>
+            <input type="text" class="form-control" id ="university" name="university" placeholder="Enter University">
         </div>
         <div class="text-center">
             <button type="submit" class="btn btn-primary">Submit</button>

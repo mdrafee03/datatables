@@ -51,14 +51,12 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'name' => 'required',
             'mobile' => 'required',
-            'university' => 'required',
         ]);
         $data = array_filter($request->all());
         Customer::create($data);
 
-        Session::flash('message', $data['name'] . ' added successfully');
+        Session::flash('message', $data['mobile'] . ' added successfully');
         return redirect('/customers');
 
     }

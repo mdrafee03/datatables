@@ -14,7 +14,7 @@
 
 
 <div class="container">
-
+    <input type="text" name="phone" placeholder="Enter phone number">
 
 
     <br/>
