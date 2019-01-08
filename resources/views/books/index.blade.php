@@ -21,7 +21,7 @@
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Status</th>
-                <th>Action</th>
+                <th width="110">Action</th>
             </tr>
         </thead>
     </table>

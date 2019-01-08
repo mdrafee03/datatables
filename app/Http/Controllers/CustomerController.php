@@ -117,5 +117,9 @@ class CustomerController extends Controller
         Session::flash('message', $customer['name'].  ' deleted successfully');
         return redirect('/customers');
     }
+    public function getByPhone($phone){
+        return Customer::where('mobile', '=', $phone)->first();
+
+    }
 
 }

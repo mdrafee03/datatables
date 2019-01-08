@@ -9,26 +9,10 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function index()
+    public function create()
     {
         $books = Book::get();
         $customers = Customer::get();
-        return view('cart', compact('books', 'customers'));
-    }
-
-    public function dataAjax(request $request)
-    {
-        $data = [];
-
-        if($request->has('q'))
-        {
-            $search = $request->q;
-            $data = DB::table('books')
-                        ->select('id', 'title')
-                        ->where('title', 'LIKE', "%$search%")
-                        ->get();
-        }
-        return response()->json($data);
-
+        return view('carts/create', compact('books', 'customers'));
     }
 }

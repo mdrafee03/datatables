@@ -19,9 +19,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('customers/data','CustomerController@data')->name('customers.data');
 Route::get('books/data','BookController@data')->name('books.data');
 Route::resource('customers', 'CustomerController');
 Route::resource('books', 'BookController');
-Route::get('cart', 'CartController@index')->name('cart');
-Route::get('select2-ajax', 'CartController@dataAjax');
+Route::get('carts/create', 'CartController@create')->name('carts.create');
+Route::post('carts/create', 'CartController@store')->name('carts.store');
+Route::prefix('customers')->group(function() {
+	Route::get('by-phone/{phone}', 'CustomerController@getByPhone');
+});
+Route::get('data','CustomerController@data')->name('customers.data');
+Route::resource('customers', 'CustomerController');
