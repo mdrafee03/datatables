@@ -1,7 +1,6 @@
 @extends('templates.master')
 
 @section('content')
-
     <h2>Customer List</h2>
     <hr/>
     <a class="btn btn-success" href="customers/create" style="margin-bottom: 15px;">Create New</a>
@@ -10,7 +9,7 @@
         <p>{{ Session::get('message') }}</p>
     </div>
     @endif
-    <table class="table table-bordered" id="cusTable">
+    <table class="table table-bordered dt-center" id="cusTable" style="width:100%">
         <thead>
             <tr>
                 <th style="padding-left: 15px;">#</th>
@@ -18,7 +17,7 @@
                 <th>Mobile</th>
                 <th>Balance</th>
                 <th>University</th>
-                <th width="150">Action</th>
+                <th>Action</th>
             </tr>
         </thead>
     </table>
@@ -32,6 +31,11 @@ $('#cusTable').DataTable({
     processing: true,
     serverSide: true,
     ajax: '{!! route('customers.data') !!}',
+    'columnDefs': [
+  {
+      "targets": 0, // your case first column
+      "className": "dt-center",
+ }],
     columns: [
         { data: 'id', name: 'id' },
         { data: 'name', name: 'name' },
