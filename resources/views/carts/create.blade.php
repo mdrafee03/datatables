@@ -50,10 +50,24 @@
                                 <button type="button" class="btn btn-secondary btn-dark col-6">Detach</button>
                             </div>
                         </div>
-                    <div id="customer-detail" style="display:none">
-                        <input type="text" name="name">
-                        <input type="number" name="balance">
-                        <input type="text" name="university">
+                    <div id="customer-detail" class="customer-detail" style="display:none">
+                        <form action="">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+                                </div>
+                                <input type="text" name="name" class="form-control" placeholder="Full name" aria-label="name" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-university" aria-hidden="true"></i></span>
+                                </div>
+                                <input type="text" name="university" class="form-control" placeholder="University" aria-label="university" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="text-center customer-detail-submit">
+                                <button type="submit" class="btn btn-outline-secondary">Secondary</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="register-box">
@@ -89,7 +103,12 @@
     <input type="text" name="book_id" class="book_id" hidden>
     <tr class="cartRow">
         <td class="title"></td>
-        <td class="sellOrReturn"></td>
+        <td class="sellOrReturn">
+            <select name="sellOrReturn" class="form-control">
+                <option value="new" selected>New</option>
+                <option value="old">Old</option>
+            </select>
+        </td>
         <td class="price"></td>
         <td class="quantity"><input class="inputQty" type="number">(<span class="availableQty"></span>)</td>
         <td class="total"></td>

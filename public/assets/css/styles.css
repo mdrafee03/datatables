@@ -445,6 +445,9 @@ Custom styles
 .customer .customer-display .customer-action{
   display: flex;
   padding: 30px 18px 0;
+}
+.customer .customer-detail .customer-detail-submit{
+  margin-top: 20px;
 } 
 .register-box .discount li{
   border-bottom: none;

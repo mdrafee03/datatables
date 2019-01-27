@@ -40,7 +40,11 @@
         </div>
         <div class="form-group">
             <label for="status">status</label>
-            <input type="text" class="form-control {{$errors->has('status') ? 'border-danger' : '' }}" id ="status" name="status" placeholder="Enter status">
+            <select name="status" class="form-control {{$errors->has('status') ? 'border-danger' : '' }}" id="status" placeholder="select an option">
+                <option value="" selected disabled>Select option</option>
+                <option value="new">New</option>
+                <option value="old">Old</option>
+            </select>
             <small class="error">{{ $errors->first('status') }}</small>
         </div>
         <div class="text-center">
