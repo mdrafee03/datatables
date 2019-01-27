@@ -13,7 +13,7 @@
                     <select class="search form-control">
                         <option value=""><i class="fa fa-search"></i></option>
                         @foreach($books as $book)
-                            <option value="{{ $book }}">{{ $book->title.' - '.$book->author }}</option>
+                            <option value="{{ $book }}">{{ $book->title.' - '.$book->author.' ['.$book->status.']' }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -42,15 +42,15 @@
                             <button type="button" class="input-group-text" id="searchByPhone"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </div>
                     </div>
-                    <div class="customer-display text-center">
-                        <div class="customer-name">Rafee Muhammad</div>
-                        <div class="customer-balance">Balance: &#2547;<span>5263</span></div>
+                    <div id="customer-detail" class="customer-detail text-center" style="display:none">
+                        <div class="customer-name"></div>
+                        <div class="customer-balance-wrapper">Balance: &#2547;<span class="customer-balance"></span></div>
                             <div class="btn-group row customer-action" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-secondary btn-info col-6">Edit</button>
-                                <button type="button" class="btn btn-secondary btn-dark col-6">Detach</button>
+                                <a href="" class="btn btn-secondary btn-info col-6 customer-edit">Edit</a>
+                                <button type="button" class="btn btn-secondary btn-dark col-6 customer-detach">Detach</button>
                             </div>
                         </div>
-                    <div id="customer-detail" class="customer-detail" style="display:none">
+                    <div id="customer-input" class="customer-input" style="display:none">
                         <form action="">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
@@ -58,14 +58,15 @@
                                 </div>
                                 <input type="text" name="name" class="form-control" placeholder="Full name" aria-label="name" aria-describedby="basic-addon1">
                             </div>
+                            <input type="text" id="customer-input-mobile" name="mobile" value="" hidden>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-university" aria-hidden="true"></i></span>
                                 </div>
                                 <input type="text" name="university" class="form-control" placeholder="University" aria-label="university" aria-describedby="basic-addon1">
                             </div>
-                            <div class="text-center customer-detail-submit">
-                                <button type="submit" class="btn btn-outline-secondary">Secondary</button>
+                            <div class="text-center customer-input-submit">
+                                <button type="submit" class="btn btn-outline-secondary">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -105,13 +106,13 @@
         <td class="title"></td>
         <td class="sellOrReturn">
             <select name="sellOrReturn" class="form-control">
-                <option value="new" selected>New</option>
-                <option value="old">Old</option>
+                <option value="sell" selected>Sell</option>
+                <option value="return">Return</option>
             </select>
         </td>
         <td class="price"></td>
         <td class="quantity"><input class="inputQty" type="number">(<span class="availableQty"></span>)</td>
-        <td class="total"></td>
+        <td class="total">0</td>
     </tr>
 </table>
 
@@ -125,7 +126,7 @@
         var data = JSON.parse($(".search option:selected").val());
         var cartRow = $('#cartRowTemplate .cartRow').clone();
         $(cartRow).find('.book_id').val(data.id);
-        $(cartRow).find('.title').html(data.title);
+        $(cartRow).find('.title').html(data.title+' ['+data.status+']');
         $(cartRow).find('.price').html(data.price);
         $(cartRow).find('.availableQty').html(data.quantity);
         $('#cartTable').append(cartRow);
@@ -158,20 +159,32 @@
     function searchByPhone(phone){
         $.get('../customers/by-phone/' + phone)
         .then(function(customer){
-            if(customer){
-                
+            $("#customer-detail").hide();
+            $("#customer-input").hide();
+            if(customer){              
                 for (key in customer) {
-                    $('input[name='+key+']').val(customer[key]);
+                    $('.customer-'+key+'').text(customer[key]);
                 }
+                $("#customer-detail").show();
+                // edit
+                $(".customer-edit").attr("href", '/customers/'+customer["id"]+'/edit');
+                // detach
+                $('.customer-detach').click(function(){
+                    $("#customer-detail").hide();
+                })
             }
             else{
-                $("#customer-detail").find('input').val('');
+                $("#customer-input").show();
+                $("#customer-input-mobile").val(phone);
             }
-            $("#customer-detail").show();
+            
             
         });
     }
-
+    $(function() {
+        $("form").submit(function() { return false; });
+    });
+    
 </script>
 
 @endsection()

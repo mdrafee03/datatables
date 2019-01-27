@@ -434,19 +434,19 @@ Custom styles
   padding-left: 80%;
   font-weight: bold;
 }
-.customer .customer-display .customer-name{
+.customer .customer-detail .customer-name{
   font-weight: 400;
   font-size:20px;
 } 
-.customer .customer-display .customer-balance{
+.customer .customer-detail .customer-balance-wrapper{
   font-weight: 500;
   font-size:18px;
 }
-.customer .customer-display .customer-action{
+.customer .customer-detail .customer-action{
   display: flex;
   padding: 30px 18px 0;
 }
-.customer .customer-detail .customer-detail-submit{
+.customer .customer-input .customer-input-submit{
   margin-top: 20px;
 } 
 .register-box .discount li{
