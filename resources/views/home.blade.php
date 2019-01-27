@@ -25,7 +25,7 @@
 	    	            <div class="small-box palette-2">
 	    	              <div class="inner">
 	    	                <h3>0</h3>
-	    	                <p>Total Paid Orders</p>
+	    	                <p>Total Sale</p>
 	    	              </div>
 	    	              <div class="icon">
 	    	                <i class="fas fa-shopping-cart"></i>
@@ -40,7 +40,7 @@
 	    	              <div class="inner">
 	    	                <h3>0</h3>
 
-	    	                <p>Total Users</p>
+	    	                <p>Total Customer</p>
 	    	              </div>
 	    	              <div class="icon">
 	    	                <i class="fas fa-user"></i>

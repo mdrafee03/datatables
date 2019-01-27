@@ -11,9 +11,11 @@
     <link rel="stylesheet" href="{!! asset('assets/css/font-awesome.min.css') !!}">   
     <link rel="stylesheet" href="{!! asset('assets/css/datatables.min.css') !!}">
     <link rel="stylesheet" href="{!! asset('assets/css/styles.css') !!}">
+    <link rel="stylesheet" href="{!! asset('assets/css/daterangepicker.css') !!}">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    
     <title>SafaMarwa Boi Ghar</title>
 </head>
 <body>
@@ -73,7 +75,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="/reports">
             <i class="fas fa-chart-line"></i>
             <span>Reports</span>
         </a>
@@ -88,8 +90,6 @@
 
 </div>
 
-
-<script src="{!! asset('assets/js/jquery-3.2.1.min.js') !!}"><  /script>
 <script src="{!! asset('assets/js/bootstrap.min.js') !!}"></script>
 <script src="{!! asset('assets/js/script.js') !!}"></script>
 <script src="{!! asset('assets/js/datatables.min.js') !!}"></script>

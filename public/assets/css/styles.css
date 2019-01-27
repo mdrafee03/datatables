@@ -6,6 +6,18 @@ table {
 hr{
   margin-bottom: 40px;
 }
+select {
+  /* for Firefox */
+  -moz-appearance: none;
+  /* for Chrome */
+  -webkit-appearance: none;
+}
+
+/* For IE10 */
+select::-ms-expand {
+  display: none;
+}
+
 #deleteForm{
     display: inline-block;
 }
@@ -402,8 +414,16 @@ Custom styles
   /* *********************
       Cart
       ****************** */
-
-.search-wrapper, .table, .customer, .register-box{
+.select2-selection__arrow{
+  display: none;
+}
+.select2-container--default .select2-selection--single {
+  border: none;
+}
+.select2-search--dropdown{
+  border-top: 1px solid #aaa;
+}
+.search-wrapper, #orderList, .customer, .register-box{
   border-radius: 6px;
   box-shadow: 0px 0px 9px 2px grey;
   margin-bottom: 20px;
@@ -456,4 +476,74 @@ Custom styles
 }
 .register-box .amount .total-amount-balance .amount-number{
   color: #ff9e28;
+}
+
+/* 
+******************
+REPORTS
+*****************
+*/
+
+.box{
+  border-radius: 6px;
+  box-shadow: 0px 0px 9px 2px grey;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+.report-category .fas, .report-subcategory .fas{
+  margin-right: 10px;
+}
+.report-subcategory h3{
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 25px;
+}
+.report-subcategory .report-sales{
+  margin-bottom: 25px;
+}
+
+/* Report Filter */
+.date-range{
+  line-height: 2;
+  text-align: center;
+
+}
+
+#date-range-select{
+  background: #fff; 
+  cursor: pointer; 
+  padding: 5px 10px; 
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  border-bottom: 2px solid #aaa;
+}
+
+/* Report Table */
+#report-table{
+  width: 100%;
+}
+td.details-control {
+    background: url('../../images/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    background: url('../../images/details_close.png') no-repeat center center;
+}
+
+
+
+.details-container {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  padding-top: 5px;
+}
+
+.details-table {
+  width: 100%;
+  background-color: #fff;
+  margin: 5px;
+}
+
+.title {
+  font-weight: bold;
 }

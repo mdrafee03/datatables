@@ -27,3 +27,5 @@ Route::prefix('customers')->group(function() {
 });
 Route::get('data','CustomerController@data')->name('customers.data');
 Route::resource('customers', 'CustomerController');
+Route::get('reports', 'ReportController@index');
+Route::get('reports/generate', 'ReportController@generate');
