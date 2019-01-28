@@ -1,12 +1,11 @@
 @extends('templates.master')
 
 @section('content')
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <h2>Cart</h2>
 <hr/>
     <div class="container-fluid">
     <form action="">
+        @csrf
         <div class="row">
             <div class="col-md-8">
                 <div class="search-wrapper">
@@ -50,25 +49,23 @@
                                 <button type="button" class="btn btn-secondary btn-dark col-6 customer-detach">Detach</button>
                             </div>
                         </div>
-                    <div id="customer-input" class="customer-input" style="display:none">
-                        <form action="">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
-                                </div>
-                                <input type="text" name="name" class="form-control" placeholder="Full name" aria-label="name" aria-describedby="basic-addon1">
+                    <div id="customer-input" class="customer-input" style="display:none" data-action="{{ route('customers.store') }}">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" id="customer-input-mobile" name="mobile" value="" hidden>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-university" aria-hidden="true"></i></span>
-                                </div>
-                                <input type="text" name="university" class="form-control" placeholder="University" aria-label="university" aria-describedby="basic-addon1">
+                            <input type="text" name="name" class="form-control" placeholder="Full name" aria-label="name" aria-describedby="basic-addon1" id="customer-name">
+                        </div>
+                        <input type="text" id="customer-input-mobile" name="mobile" value="" hidden>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-university" aria-hidden="true"></i></span>
                             </div>
-                            <div class="text-center customer-input-submit">
-                                <button type="submit" class="btn btn-outline-secondary">Submit</button>
-                            </div>
-                        </form>
+                            <input type="text" name="university" class="form-control" placeholder="University" aria-label="university" aria-describedby="basic-addon1" id="university">
+                        </div>
+                        <div class="text-center customer-input-submit">
+                            <button type="button" class="btn btn-outline-secondary new-customer">Add new Customer</button>
+                        </div>
                     </div>
                 </div>
                 <div class="register-box">
@@ -115,7 +112,9 @@
         <td class="total">0</td>
     </tr>
 </table>
+@endsection
 
+@push('scripts')
 <script type="text/javascript">
 
     $('.search').select2({
@@ -138,6 +137,7 @@
         var availableQty = parseInt(parent.find('.availableQty').text());
         if(inputQty > availableQty){
             $(parent).find('.inputQty').val(availableQty);
+            inputQty = availableQty;
         }
         $(parent).find('.total').html(parseFloat(parent.find('.price').text())*inputQty);
         var sum = 0;
@@ -181,13 +181,36 @@
             
         });
     }
-    $(function() {
-        $("form").submit(function() { return false; });
+    $(document).on('click', '.new-customer', function(e) { 
+        e.preventDefault();
+        var url = $("#customer-input").attr('data-action');
+        var data = {
+            _token: $("[name=_token]").val(),
+            mobile: $("#customer-input-mobile").val(),
+            name: $("#customer-name").val(),
+            university: $("#university").val()
+        };
+        $.post(url, data)
+        .then(function(customer){
+            if(customer){              
+                for (key in customer) {
+                    $('.customer-'+key+'').text(customer[key]);
+                }
+                $('#customer-input').hide();
+                $("#customer-detail").show();
+                // edit
+                $(".customer-edit").attr("href", '/customers/'+customer["id"]+'/edit');
+                // detach
+                $('.customer-detach').click(function(){
+                    $("#customer-detail").hide();
+                })
+            }
+        })
     });
     
 </script>
 
-@endsection()
+@endpush
 
 </body>
 </html>

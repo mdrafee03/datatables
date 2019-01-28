@@ -24,9 +24,8 @@ class CustomerController extends Controller
         $query = Customer::query();
 
         return $datatables->eloquent($query)
-            ->addColumn('action', function($customer)
-            {
-                  return view('customers.actions', compact('customer'))->render();
+            ->addColumn('action', function ($customer) {
+                return view('customers.actions', compact('customer'))->render();
             })->make(true);
 
     }
@@ -54,8 +53,13 @@ class CustomerController extends Controller
             'mobile' => 'required',
         ]);
         $data = array_filter($request->all());
-        Customer::create($data);
-
+        if (empty($data['balance'])) {
+            $data['balance'] = 0;
+        }
+        $customer = Customer::create($data);
+        if ($request->ajax()) {
+            return $customer;
+        }
         Session::flash('message', $data['mobile'] . ' added successfully');
         return redirect('/customers');
 
@@ -81,7 +85,7 @@ class CustomerController extends Controller
     public function edit($id)
     {
         $customer = Customer::find($id);
-        return view('customers.edit',['customer' => $customer]);
+        return view('customers.edit', ['customer' => $customer]);
     }
 
     /**
@@ -97,7 +101,7 @@ class CustomerController extends Controller
         $data = $request->all();
         $customer->update($data);
 
-        Session::flash('message', $data['name'].  ' updated successfully');
+        Session::flash('message', $data['name'] . ' updated successfully');
         return redirect('/customers');
 
     }
@@ -114,10 +118,11 @@ class CustomerController extends Controller
         $customer = Customer::find($id);
         $customer->destroy($id);
 
-        Session::flash('message', $customer['name'].  ' deleted successfully');
+        Session::flash('message', $customer['name'] . ' deleted successfully');
         return redirect('/customers');
     }
-    public function getByPhone($phone){
+    public function getByPhone($phone)
+    {
         return Customer::where('mobile', '=', $phone)->first();
 
     }
