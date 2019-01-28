@@ -42,6 +42,7 @@
                         </div>
                     </div>
                     <div id="customer-detail" class="customer-detail text-center" style="display:none">
+                        <input type="text" class="customer-id" value="" hidden>
                         <div class="customer-name"></div>
                         <div class="customer-balance-wrapper">Balance: &#2547;<span class="customer-balance"></span></div>
                             <div class="btn-group row customer-action" role="group" aria-label="Basic example">
@@ -161,7 +162,8 @@
         .then(function(customer){
             $("#customer-detail").hide();
             $("#customer-input").hide();
-            if(customer){              
+            if(customer){
+                $('.customer-id').val(customer['id']);              
                 for (key in customer) {
                     $('.customer-'+key+'').text(customer[key]);
                 }
@@ -211,6 +213,5 @@
 </script>
 
 @endpush
-
 </body>
 </html>
