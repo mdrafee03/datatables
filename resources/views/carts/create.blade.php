@@ -133,7 +133,7 @@
         $(cartRow).find('.availableQty').html(data.quantity);
         $(cartRow).find('.total').html(data.price);
         $('#cartTable').append(cartRow);
-        $(this).val(null).trigger('change');
+
 
     })
     $(document).on('keyup', '.inputQty', function(){

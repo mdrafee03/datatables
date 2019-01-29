@@ -17,7 +17,10 @@ class CreateBookCartTable extends Migration
             $table->increments('id');
             $table->integer('book_id');
             $table->integer('cart_id');
+            $table->string('sellOrReturn');
+            $table->integer('quantity');
             $table->double('price',10,2);
+
             $table->timestamps();
         });
     }

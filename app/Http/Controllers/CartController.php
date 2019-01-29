@@ -25,5 +25,9 @@ class CartController extends Controller
             'customer_id' => $request->customer_id
         ]);
         dd($request->all());
+        foreach($request->book_id as $key => $book_id){
+            $quantity = $request->inputQty[$key];
+            $sellOrReturn = $request->sellOrReturn[$key];
+        }
     }
 }
