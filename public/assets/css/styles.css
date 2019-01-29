@@ -438,7 +438,8 @@ Custom styles
   font-weight: 400;
   font-size:20px;
 } 
-.customer .customer-detail .customer-balance-wrapper{
+.customer .customer-detail .customer-balance-wrapper
+{
   font-weight: 500;
   font-size:18px;
 }
@@ -508,6 +509,7 @@ REPORTS
 .date-range{
   line-height: 2;
   text-align: center;
+  margin-bottom: 25px;
 
 }
 

@@ -30,7 +30,7 @@
                     </tbody>
                 </table>
                 <div class="subtotal">
-                    <p><span>Subtotal: </span><span class="amountTotal"></span></p>
+                    <p><span>Subtotal: </span><span id="subtotal" class="amountTotal"></span></p>
                 </div>    
             </div>
             <div class="col-md-4">
@@ -73,18 +73,20 @@
                     <ul class="list-group discount">
                         <li class="list-group-item">
                             <span>Discount on all product</span>
-                            <span class="float-right"><input type="number"> %</span>
+                            <span class="float-right"><input type="number" id="discount"> %</span>
                         </li>
                     </ul>
                     <div class="amount row">
                             <div class="total-amount col-6">
                                 <div class="amount-heading">Total</div>
-                                <div class="amount-number">&#2547; <span class="amountTotal"></span></div>
+                                <div class="amount-number">&#2547; <span class="amountTotal amountTotal-number"></span></div>
+                                <input type="hidden" class="amountTotal-number-hidden">
 
                             </div>
                             <div class="total-amount-balance col-6">
                                 <div class="amount-heading">Balance</div>
-                                <div class="amount-number">&#2547; <span class="amountTotal"></span></div>
+                                <div class="amount-number">&#2547; <span class="amountTotal balanceTotal-number"></span></div>
+                                <input type="hidden" class="balanceTotal-number-hidden">
                             </div>
                             
                     </div>
@@ -129,6 +131,7 @@
         $(cartRow).find('.title').html(data.title+' ['+data.status+']');
         $(cartRow).find('.price').html(data.price);
         $(cartRow).find('.availableQty').html(data.quantity);
+        $(cartRow).find('.total').html(data.price);
         $('#cartTable').append(cartRow);
         $(this).val(null).trigger('change');
 
@@ -210,7 +213,21 @@
             }
         })
     });
-    
+    $('#discount').on('change', function(){
+        var subtotal = parseInt($('#subtotal').text());
+        var discount = parseInt($('#discount').val());
+        var totalAfterDiscount = (subtotal-subtotal*discount/100).toFixed();
+        $(".amountTotal-number").text(totalAfterDiscount);
+
+    })
+    $('.amountTotal-number').bind("DOMSubtreeModified", function(){
+        var amountTotal = $('.amountTotal-number').text();
+        $(".amountTotal-number-hidden").val(amountTotal);
+    });
+    $('.balanceTotal-number').bind("DOMSubtreeModified", function(){
+        var amountTotal = $('.balanceTotal-number').text();
+        $(".balanceTotal-number-hidden").val(amountTotal);
+    });
 </script>
 
 @endpush
