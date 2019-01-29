@@ -4,7 +4,7 @@
 <h2>Cart</h2>
 <hr/>
     <div class="container-fluid">
-    <form action="">
+    <form action="{{ route('carts.store') }}" method="POST">
         @csrf
         <div class="row">
             <div class="col-md-8">
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div id="customer-detail" class="customer-detail text-center" style="display:none">
-                        <input type="text" class="customer-id" value="" hidden>
+                        <input type="text" class="customer-id" name="customer_id" value="" hidden>
                         <div class="customer-name"></div>
                         <div class="customer-balance-wrapper">Balance: &#2547;<span class="customer-balance"></span></div>
                             <div class="btn-group row customer-action" role="group" aria-label="Basic example">
@@ -90,7 +90,7 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <button type="button" class="btn btn-success btn-lg">Complete Sale</button>
+                    <button type="submit" class="btn btn-success btn-lg">Complete Sale</button>
                 </div>
             <br/>
             
@@ -99,17 +99,17 @@
 </div>
 
 <table id="cartRowTemplate" style="display: none">
-    <input type="text" name="book_id" class="book_id" hidden>
     <tr class="cartRow">
         <td class="title"></td>
         <td class="sellOrReturn">
-            <select name="sellOrReturn" class="form-control">
+            <input type="hidden" name="book_id[]" class="book_id">
+            <select name="sellOrReturn[]" class="form-control">
                 <option value="sell" selected>Sell</option>
                 <option value="return">Return</option>
             </select>
         </td>
         <td class="price"></td>
-        <td class="quantity"><input class="inputQty" type="number">(<span class="availableQty"></span>)</td>
+        <td class="quantity"><input class="inputQty" name="inputQty[]" type="number">(<span class="availableQty"></span>)</td>
         <td class="total">0</td>
     </tr>
 </table>
@@ -130,6 +130,7 @@
         $(cartRow).find('.price').html(data.price);
         $(cartRow).find('.availableQty').html(data.quantity);
         $('#cartTable').append(cartRow);
+        $(this).val(null).trigger('change');
 
     })
     $(document).on('keyup', '.inputQty', function(){
