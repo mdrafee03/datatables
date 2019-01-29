@@ -18,7 +18,6 @@ class CreateCartsTable extends Migration
             $table->integer('customer_id');
             $table->double('price',10,2);
             $table->double('discount');
-            $table->String('status');
             $table->timestamps();
         });
     }

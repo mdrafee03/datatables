@@ -73,14 +73,14 @@
                     <ul class="list-group discount">
                         <li class="list-group-item">
                             <span>Discount on all product</span>
-                            <span class="float-right"><input type="number" id="discount"> %</span>
+                            <span class="float-right"><input type="number" name="discount" id="discount"> %</span>
                         </li>
                     </ul>
                     <div class="amount row">
                             <div class="total-amount col-6">
                                 <div class="amount-heading">Total</div>
                                 <div class="amount-number">&#2547; <span class="amountTotal amountTotal-number"></span></div>
-                                <input type="hidden" class="amountTotal-number-hidden">
+                                <input type="hidden" name = "totalAmount" class="amountTotal-number-hidden">
 
                             </div>
                             <div class="total-amount-balance col-6">

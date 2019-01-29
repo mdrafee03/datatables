@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
 {
+    protected $fillable = [
+        'customer_id','price', 'discount',
+    ];
     public function books()
     {
         return $this->belongsToMany('App\Book');
