@@ -40,10 +40,10 @@ class CartController extends Controller
                 $book_quantity = $book_quantity + (int)$quantity;
             }
             $book_quantity = (string)$book_quantity;
-            
-            dd($book_quantity);  
-            $book_quantity->save();
+
+
+            // $book_quantity->save();
         }
-        
+        dd($request->all());  
     }
 }

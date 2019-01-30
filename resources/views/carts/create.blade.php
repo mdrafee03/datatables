@@ -24,6 +24,7 @@
                             <th>price</th>
                             <th>Qty</th>
                             <th>Total</th>
+                            <th>Remove</th>
                         </tr>
                     </thead>
                     <tbody id="cartTable">  
@@ -113,6 +114,7 @@
         <td class="price"></td>
         <td class="quantity"><input class="inputQty" name="inputQty[]" type="number">(<span class="availableQty"></span>)</td>
         <td class="total">0</td>
+        <td class="text-center"><button type="button" class="deleteRow"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></button></td>
     </tr>
 </table>
 @endsection
@@ -123,6 +125,9 @@
     $('.search').select2({
         placeholder: 'Select an item',
         width: '100%',
+    });
+    $('.table tbody').on('click', '.deleteRow', function(){
+        $(this).closest('tr').remove();
     });
     $('.search').on('change', function(){
         var data = JSON.parse($(".search option:selected").val());
@@ -228,6 +233,7 @@
         var amountTotal = $('.balanceTotal-number').text();
         $(".balanceTotal-number-hidden").val(amountTotal);
     });
+
 </script>
 
 @endpush

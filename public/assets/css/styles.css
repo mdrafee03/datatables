@@ -434,6 +434,10 @@ Custom styles
   padding-left: 80%;
   font-weight: bold;
 }
+.deleteRow{
+  background: none;
+  border: none;
+}
 .customer .customer-detail .customer-name{
   font-weight: 400;
   font-size:20px;
