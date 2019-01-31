@@ -1,4 +1,11 @@
-
+/* remove array from number field */
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
 table {
     background-color: #ffffff;
     box-shadow: 0 0 10px #cccccc;
@@ -414,6 +421,7 @@ Custom styles
   /* *********************
       Cart
       ****************** */
+
 .select2-selection__arrow{
   display: none;
 }
@@ -428,6 +436,16 @@ Custom styles
   box-shadow: 0px 0px 9px 2px grey;
   margin-bottom: 20px;
   padding: 10px;
+}
+.table tr.cartRow td.title, .table tr.cartRow td.price, .table tr.cartRow td.total{
+  padding-top: 19px;
+}
+.table tr.cartRow td.quantity .inputQty{
+  width: 50px;
+}
+.table tr.cartRow td.quantity .availableQty-wrapper{
+  padding-top: 7px;
+  padding-left: 10px;
 }
 .subtotal{
   font-size: 23px;
@@ -454,43 +472,38 @@ Custom styles
 .customer .customer-input .customer-input-submit{
   margin-top: 20px;
 } 
-.register-box .discount li{
-  border-bottom: none;
-  border-bottom-left-radius: 0px;
-  border-bottom-right-radius: 0px;
-}
-.register-box .discount input{
-  width: 50px;
-}
 .register-box .amount{
-  border-top: 1px dashed #D0D3D8;
-  margin: 0 auto;
-  margin-bottom:-8px
+  margin: -10 auto;
+}
+.register-box .amount div{
+  padding: 3px 0;
 }
 .register-box .total-amount{
-  border-right: 1px dashed #D0D3D8;
+  border-right: 2px groove #D0D3D8;
   padding-bottom: 12px;
 }
 .register-box .amount .amount-heading{
   font-weight: bold;
   font-size: 20px; 
-  color: #67676C; 
+  color: #67676C;
+  padding-left: 8px; 
 }
 .register-box .amount .amount-number{
   font-weight: bold;
   font-size: 25px;
   float: right;
   color: #3a984f;
+  padding-right: 10px;
 }
 .register-box .amount .total-amount-balance .amount-number{
   color: #ff9e28;
 }
 
-/* 
+/*  
 ******************
 REPORTS
-*****************
-*/
+***************** */
+
 
 .box{
   border-radius: 6px;

@@ -21,29 +21,45 @@ class CartController extends Controller
         $this->validate($request, [
             'customer_id' => 'required',
         ]);
+        $currentBalance = (Float)$request->totalBalance;
+        $customerBalance = Customer::find($request->customer_id);
+        $customerBalance->balance = $currentBalance;
+        $customerBalance->save();
+
         $cart = Cart::create([
             'customer_id' => $request->customer_id,
             'price' => $request->totalAmount,
             'discount' => $request->discount,  
         ]);
-        
-        foreach($request->book_id as $key => $book_id){
-            $bookId = $request->book_id[$key];
+        foreach ($request->book_id as $key => $book_id){
+            
+           $bookId = $request->book_id[$key];
             $cartId = $cart->id;
-            $quantity = $request->inputQty[$key];
+            $saleQuantity = $request->inputQty[$key];
             $sellOrReturn = $request->sellOrReturn[$key];
-            $book_quantity = Book::get()[$bookId]->quantity;
-            if($sellOrReturn = "sell"){
-                $book_quantity = $book_quantity - (int)$quantity;
+            $price = Book::find($bookId)->price;
+            $book_quantity = Book::find($bookId);
+           
+            
+            DB::table('book_cart')->insert([
+                'book_id'=> $bookId,
+                'cart_id' => $cart->id, 
+                'sellOrReturn'=> $sellOrReturn, 
+                'quantity'=> $saleQuantity,
+                'price' => $price,
+                'created_at' =>now(),
+                'updated_at' =>now(),
+                ]);
+
+            if($sellOrReturn == "sell"){
+                $book_quantity->quantity = $book_quantity->quantity - (int)$saleQuantity;
             }
             else{
-                $book_quantity = $book_quantity + (int)$quantity;
+                $book_quantity->quantity = $book_quantity->quantity + (int)$saleQuantity;
             }
-            $book_quantity = (string)$book_quantity;
-
-
-            // $book_quantity->save();
-        }
-        dd($request->all());  
+            $book_quantity->save();
+            
+        } 
+        
     }
 }

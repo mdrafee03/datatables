@@ -10,8 +10,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{!! asset('assets/css/font-awesome.min.css') !!}">   
     <link rel="stylesheet" href="{!! asset('assets/css/datatables.min.css') !!}">
-    <link rel="stylesheet" href="{!! asset('assets/css/styles.css') !!}">
+    
     <link rel="stylesheet" href="{!! asset('assets/css/daterangepicker.css') !!}">
+    <link rel="stylesheet" href="{!! asset('assets/css/styles.css') !!}">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
