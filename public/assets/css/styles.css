@@ -440,8 +440,8 @@ Custom styles
 .table tr.cartRow td.title, .table tr.cartRow td.price, .table tr.cartRow td.total{
   padding-top: 19px;
 }
-.table tr.cartRow td.quantity .inputQty{
-  width: 50px;
+.table tr.cartRow td.quantity .inputQty, .table tr.cartRow td .return-price, .table tr.cartRow td.discount .discount-input{
+  width: 70px;
 }
 .table tr.cartRow td.quantity .availableQty-wrapper{
   padding-top: 7px;
@@ -479,8 +479,11 @@ Custom styles
   padding: 3px 0;
 }
 .register-box .total-amount{
-  border-right: 2px groove #D0D3D8;
+  border-right: 10px solid rgb(58, 152, 79);;
   padding-bottom: 12px;
+}
+.register-box .total-amount-balance{
+  border-left: 10px solid #ff9e28;
 }
 .register-box .amount .amount-heading{
   font-weight: bold;

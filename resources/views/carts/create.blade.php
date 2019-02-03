@@ -33,6 +33,7 @@
                 </table>
                 <div class="subtotal">
                     <span>Subtotal: </span><span id="subtotal" class="amountTotal"></span>
+                    <input type="hidden" name="subtotal" class="subtotal-input" value="0">
                 </div>    
             </div>
             <div class="col-md-4">
@@ -106,12 +107,15 @@
                 <option value="return">Return</option>
             </select>
         </td>
-        <td class="price"></td>
+        <td>
+            <span class="price"></span>
+            <input type="number" name="price[]" class="form-control return-price">
+        </td>
         <td class="quantity form-row" style="margin:0">
             <input class="inputQty form-control col" id="inputQty" name="inputQty[]" type="number" value="1">
             <label class="availableQty-wrapper col-form-control col" id="inputQty">(<span class="availableQty"></span>)</label>
         </td>
-        <td class="discount"><input type="number" value="0" class="form-control discount-input"></td>
+        <td class="discount"><input type="number" name="discount[]" value="0" class="form-control discount-input"></td>
         <td class="total">0</td>
         <td class="text-center"><button type="button" class="deleteRow"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></button></td>
     </tr>
@@ -146,6 +150,8 @@
             $(cartRow).find('.book_id').val(data.id);
             $(cartRow).find('.title').html(data.title+' ['+data.status+']');
             $(cartRow).find('.price').html(data.price);
+            $(cartRow).find('.return-price').val(data.price);
+            $(cartRow).find('.return-price').hide();
             $(cartRow).find('.availableQty').html(data.quantity);
             $(cartRow).find('.total').html(data.price);
             $('#cartTable').append(cartRow);
@@ -178,11 +184,16 @@
             $(parent).find('.total').html(price*-1);
             $(parent).find('.availableQty-wrapper').hide();
             $(parent).find('.discount-input').hide();
+            $(parent).find('.return-price').show();
+            $(parent).find('.price').hide();
+
         }
         else{
             $(parent).find('.total').html(price);
             $(parent).find('.availableQty-wrapper').show();
             $(parent).find('.discount-input').show();
+            $(parent).find('.return-price').hide();
+            $(parent).find('.price').show();
         }
         subtotalCal();
     });
@@ -260,6 +271,7 @@
     $('.amountTotal').bind("DOMSubtreeModified", function(){
         var subTotal = parseFloat($(this).text());
         var balance = parseFloat($('.customer-balance').text());
+        $('.subtotal-input').val(subTotal);
         balanceUpdate();
     });
     function balanceUpdate(){

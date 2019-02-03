@@ -28,25 +28,27 @@ class CartController extends Controller
 
         $cart = Cart::create([
             'customer_id' => $request->customer_id,
-            'price' => $request->totalAmount,
-            'discount' => $request->discount,  
+            'subtotal' => (double)$request->subtotal,  
+            'total' => (double)$request->totalAmount,
+            'balance' => (double)$request->totalBalance,
         ]);
         foreach ($request->book_id as $key => $book_id){
             
            $bookId = $request->book_id[$key];
             $cartId = $cart->id;
-            $saleQuantity = $request->inputQty[$key];
             $sellOrReturn = $request->sellOrReturn[$key];
-            $price = Book::find($bookId)->price;
+            $price = $request->price[$key];
+            $saleQuantity = $request->inputQty[$key];
+            $discount = $request->discount[$key];
             $book_quantity = Book::find($bookId);
-           
             
             DB::table('book_cart')->insert([
                 'book_id'=> $bookId,
                 'cart_id' => $cart->id, 
                 'sellOrReturn'=> $sellOrReturn, 
-                'quantity'=> $saleQuantity,
                 'price' => $price,
+                'quantity'=> $saleQuantity,
+                'discount' => $discount,    
                 'created_at' =>now(),
                 'updated_at' =>now(),
                 ]);

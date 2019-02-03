@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddDiscountToBookCartTable extends Migration
+class DropPriceFromCartsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddDiscountToBookCartTable extends Migration
      */
     public function up()
     {
-        Schema::table('book_cart', function (Blueprint $table) {
-            $table->integer('discount');
+        Schema::table('carts', function (Blueprint $table) {
+            $table->dropColumn('price');
         });
     }
 
@@ -25,8 +25,8 @@ class AddDiscountToBookCartTable extends Migration
      */
     public function down()
     {
-        Schema::table('book_cart', function (Blueprint $table) {
-            $table->dropColumn('discount');
+        Schema::table('carts', function (Blueprint $table) {
+            $table->double('price',10,2);
         });
     }
 }
