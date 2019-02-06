@@ -16,7 +16,7 @@
             <div class="report-subcategory box">
                 <h3 class="text-info"><i class="icon ti-shopping-cart"></i>	Sales</h3>
                 <div class="list-group report-sales">  
-                    <a href="/reports/generate" class="list-group-item list-group-item-action"><i class="fas fa-receipt"></i>Summary Report</a>
+                    <a href="/reports/sales/detail" class="list-group-item list-group-item-action"><i class="fas fa-receipt"></i>Summary Report</a>
                     <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-calendar"></i>Details Report</a>
                 </div>
             </div>

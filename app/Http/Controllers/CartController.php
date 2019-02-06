@@ -7,6 +7,7 @@ use App\Book;
 use App\Customer;
 use App\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -62,6 +63,8 @@ class CartController extends Controller
             $book_quantity->save();
             
         } 
-        
+        Session::flash('message','Sale Completed');
+        return redirect('/carts/create');
+
     }
 }

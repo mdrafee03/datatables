@@ -91,9 +91,14 @@
                 <div class="text-center">
                     <button type="submit" class="btn btn-success btn-lg">Complete Sale</button>
                 </div>
-            <br/>
+                @if(Session::has('message'))
+                <div class="alert-custom alert-custom-cart">
+                    <p>{{ Session::get('message') }}</p>
+                </div>
+                @endif
             
             </div>
+        </div>
     </form>
 </div>
 

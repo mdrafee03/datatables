@@ -501,7 +501,11 @@ Custom styles
 .register-box .amount .total-amount-balance .amount-number{
   color: #ff9e28;
 }
-
+.alert-custom-cart{
+  margin-right: 37%;
+  margin: 10% 35% 0 0;
+  font-size: 120%;
+}
 /*  
 ******************
 REPORTS

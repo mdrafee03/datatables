@@ -13,35 +13,24 @@
     			<span></span> <i class="fa fa-caret-down"></i>
 			</div>
 		</div>
-	</div>
-	<div class="box">
-		<table class="table table-hover datatables ">
-        <thead>
-          <tr>
-            <th></th>
-				<th>Sale Id</th>
-				<th>Date</th>
-				<th>Books Purchased</th>
-				<th>Books Return</th>
-				<th>Subtotal</th>
-				<th>Discount</th>
-				<th>Total</th>
-				<th>Balance</th>
-				<th>Comment</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-	</div>
-
-
-
-
-      
-    </div>
-  </div>
+<div class="box">
+  <table class="table table-hover datatables ">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Sale Id</th>
+          <th>Date</th>
+          <th>Subtotal</th>
+          <th>Total</th>
+          <th>Balance</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
 </div>
 
+@endsection()
+@push('scripts')
 <script type="text/javascript">
  	$(function() {
 
@@ -74,6 +63,7 @@ $('#ReportTable').DataTable({
 
 });
 } );
+
 $(document).ready(function() {
   
   var data = [
@@ -140,81 +130,74 @@ $(document).ready(function() {
   ];
   
   
-  function format (data) {
-      return '<div class="details-container">'+
-          '<table class="details-table">'+
-				'<thead>'+
-				'<tr>'+
-					'<th>Book_name</td>'+
-					'<th>Sell or Return</td>'+
-					'<th>price</td>'+
-					'<th>Qty</td>'+
-					'<th>Total</td>'+
-				'</tr>'+
-				'</thead>'+
-				'<tbody>'+
-				'<tr>'+
-					'<td>'+data.ip_address+'</td>'+
-					'<td>'+data.first_name + '</td>'+
-					'<td>'+data.last_name+'</td>'+
-					'<td>'+data.email+'</td>'+
-					'<td>'+data.id+'</td>'+
-				'</tr>'+
-				'<tr>'+
-					'<td>'+data.ip_address+'</td>'+
-					'<td>'+data.first_name + '</td>'+
-					'<td>'+data.last_name+'</td>'+
-					'<td>'+data.email+'</td>'+
-					'<td>'+data.id+'</td>'+
-				'</tr>'+
-          '</table>'+
-        '</div>';
-  };
+    function format (data) {
+          return '<div class="details-container">'+
+                  '<table class="details-table">'+
+                    '<thead>'+
+                    '<tr>'+
+                      '<th>Book_name</td>'+
+                      '<th>Sell or Return</td>'+
+                      '<th>price</td>'+
+                      '<th>Qty</td>'+
+                      '<th>Total</td>'+
+                    '</tr>'+
+                    '</thead>'+
+                    '<tbody>'+
+                      '<tr>'+
+                        '<td>'+data+'</td>'+
+                        '<td>'+data+'</td>'+
+                        '<td>'+data+'</td>'+
+                        '<td>'+data+'</td>'+
+                        '<td>'+data+'</td>'+
+                      '</tr>'+
+                    '</tbody>'
+                  '</table>'+
+                '</div>';
+      };
   
-  var table = $('.datatables').DataTable({
-    // Column definitions
-    columns : [
-      {
-        className      : 'details-control',
-        defaultContent : '',
-        data           : null,
-        orderable      : false
-      },
-      {data : 'first_name'},
-      {data : 'last_name'},
-      {data : 'email'},
-	  {data: 'first_name'},
-	  {data: 'last_name'},
-      {data : 'email'},
-	  {data: 'first_name'},
-	  {data: 'last_name'},
-      {data : 'email'},
-
-
-    ],
+      var table = $('.datatables').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{!! route('sales.data') !!}',
+        columns : [
+          {
+            className      : 'details-control',
+            defaultContent : '',
+            data           : null,
+            orderable      : false
+          },
+          {data : 'id', name: 'id'},
+          {data : 'created_at', name: 'created_at'},
+          {data : 'subtotal', name: 'subtotal'},
+          {data: 'total', name: 'total'},
+          {data: 'balance', name: 'balance'},
+        ],
+        "columnDefs": [ { "defaultContent": "-", "targets": "_all" } ],
     
-    data : data,
-    
-    pagingType : 'full_numbers',
-  });
+        data : data,
+        pagingType : 'full_numbers',
+      });
  
-  $('.datatables tbody').on('click', 'td.details-control', function () {
-     var tr  = $(this).closest('tr'),
-         row = table.row(tr);
+      $('.datatables tbody').on('click', 'td.details-control', function () {
+        var tr  = $(this).closest('tr'),
+            row = table.row(tr);
     
-     if (row.child.isShown()) {
-       tr.next('tr').removeClass('details-row');
-       row.child.hide();
-       tr.removeClass('shown');
-     }
-     else {
-       row.child(format(row.data())).show();
-       tr.next('tr').addClass('details-row');
-       tr.addClass('shown');
-     }
-  });
+        if (row.child.isShown()) {
+          tr.next('tr').removeClass('details-row');
+          row.child.hide();
+          tr.removeClass('shown');
+        }
+        else {
+          $.get('/reports/sales/get-card-detail/' + row.data().id).then(function(data){
+            alert(row.data());
+            row.child(format(row.data())).show(); 
+            // row.child(format(row.data())).show();
+            tr.next('tr').addClass('details-row');
+            tr.addClass('shown');
+          });
+        }
+      });
  
-});
+    });
 	</script>
-
-@endsection()
+@endpush

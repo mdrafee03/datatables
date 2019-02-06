@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     protected $fillable = [
-        'customer_id','price', 'subtotal', 'total', 'balance',
+        'customer_id', 'sellOrReturn','price', 'subtotal', 'total', 'balance',
     ];
+    protected $with = ['books'];
+
     public function books()
     {
         return $this->belongsToMany('App\Book');
