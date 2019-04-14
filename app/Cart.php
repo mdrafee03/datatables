@@ -13,7 +13,7 @@ class Cart extends Model
 
     public function books()
     {
-        return $this->belongsToMany('App\Book');
+        return $this->belongsToMany('App\Book')->withPivot('sellOrReturn', 'quantity', 'price', 'discount')->withTimestamps();
     }
 
     public function customers()

@@ -30,4 +30,5 @@ Route::resource('customers', 'CustomerController');
 Route::get('reports', 'ReportController@index');
 Route::get('reports/sales/detail', 'ReportController@salesDetail');
 Route::get('reports/sales/data', 'ReportController@salesDataTable')->name('sales.data');
-Route::get('reports/sales/get-card-detail/{id}', 'ReportController@getCardDetailSales');
+Route::get('reports/sales/show-child/{id}', 'ReportController@showChildSales');
+Route::get('reports/sales/saleInt', 'ReportController@salesInt');
