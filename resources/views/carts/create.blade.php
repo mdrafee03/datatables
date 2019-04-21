@@ -12,9 +12,10 @@
                     <select class="search form-control">
                         <option value=""><i class="fa fa-search"></i></option>
                         @foreach($books as $book)
-                            <option value="{{ $book }}">{{ $book->title.' - '.$book->author.' ['.$book->status.']' }}</option>
+                            <option value="{{ $book }}">{{$book->book_code.'-'. $book->title.' - '.$book->author.' ['.$book->status.']' }}</option>
                         @endforeach
                     </select>
+                    <button style="display:none" id="set-null" type="button">Set Null</button>
                 </div>
                 <table class="table table-bordered" id="orderList">
                     <thead>
@@ -142,15 +143,19 @@
         placeholder: 'Select an item',
         width: '100%',
         allowClear: true,
-  
+        closeOnSelect: false,
     });
 
-
+    $('.search').select2('open');
+    $('#set-null').on("click", function() {
+        $(".search").val(null).trigger("change");
+    });
     $('.search').on('change', function(){
+        $('.select2-search__field').val('');
         var data = $(".search option:selected").val();
         if(data !=""){
             data = JSON.parse(data);
-       
+            $("#set-null").click();
             var cartRow = $('#cartRowTemplate .cartRow').clone();
             $(cartRow).find('.book_id').val(data.id);
             $(cartRow).find('.title').html(data.title+' ['+data.status+']');
