@@ -576,3 +576,9 @@ tr.shown td.details-control {
 .title {
   font-weight: bold;
 }
+/*******************
+Invoice
+*******************/
+.right-pannel{
+  padding-left: 23rem;
+}
