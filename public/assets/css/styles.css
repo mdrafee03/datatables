@@ -579,6 +579,18 @@ tr.shown td.details-control {
 /*******************
 Invoice
 *******************/
-.right-pannel{
-  padding-left: 23rem;
+
+/* =============================================================
+ PAGE STYLES
+============================================================ */
+
+.invoice table tfoot td {
+border: none
+}
+.invoice table tfoot td{
+  text-align: right;
+}
+.invoice table tfoot tr td:last-child{
+  text-align: left;
+
 }

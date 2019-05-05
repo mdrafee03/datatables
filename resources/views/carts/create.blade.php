@@ -90,7 +90,10 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-success btn-lg">Complete Sale</button>
+                    <button type="submit" class="btn btn-success btn">Complete Sale</button>
+                </div>
+                <div class="text-center">
+                    
                 </div>
                 @if(Session::has('message'))
                 <div class="alert-custom alert-custom-cart">
@@ -196,7 +199,6 @@
             $(parent).find('.discount-input').hide();
             $(parent).find('.return-price').show();
             $(parent).find('.price').hide();
-
         }
         else{
             $(parent).find('.total').html(price);
@@ -212,9 +214,13 @@
         $(this).closest('tr').remove();
         subtotalCal();
     });
-
+    $(document).on('keyup', '.return-price', function(){
+        var parent = $(this).closest('tr');
+        var price = parseInt(parent.find('.return-price').val());
+        var inputQty = parseInt(parent.find('.inputQty').val());
+        $(parent).find('.total').html(price*inputQty*-1);
     // Key up for input quantity
-    
+    });
     $(document).on('keyup', '.inputQty', function(){
         var parent = $(this).closest('tr');
         var inputQty = parseInt(parent.find('.inputQty').val());
@@ -232,17 +238,14 @@
             }
             else{
                 $(parent).find('.total').html(parseFloat(parent.find('.price').text())*inputQty);
-            }
-
-            
+            }            
         }
         else{
-            $(parent).find('.total').html(parseFloat(parent.find('.price').text())*inputQty*-1);
+            $(parent).find('.total').html(parseFloat(parent.find('.return-price').val())*inputQty*-1);
             if(inputQty<1 || isNaN(inputQty)){
                 $(parent).find('.inputQty').val(1);
-                $(parent).find('.total').html(parseFloat(parent.find('.price').text()));
+                $(parent).find('.total').html(parseFloat(parent.find('.return-price').val()));
             }
-
         }
 
         subtotalCal();
@@ -306,8 +309,6 @@
             }
         }
     }
-
-
     $('#phone').keypress(function(event)
     {
         var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -385,6 +386,7 @@
         var amountTotal = $('.balanceTotal-number').text();
         $(".balanceTotal-number-hidden").val(amountTotal);
     });
+    $('#invoice')
 
 </script>
 

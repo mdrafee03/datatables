@@ -32,3 +32,5 @@ Route::get('reports/sales/detail', 'ReportController@salesDetail');
 Route::get('reports/sales/data', 'ReportController@salesDataTable')->name('sales.data');
 Route::get('reports/sales/show-child/{id}', 'ReportController@showChildSales');
 Route::get('reports/sales/saleInt', 'ReportController@salesInt');
+Route::get('reports/invoice/{id}', 'ReportController@invoice')->name('reports.invoice');
+Route::get('reports/invoice/pdf/{id}', 'ReportController@pdf')->name('reports.invoice.pdf');
